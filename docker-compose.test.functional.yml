@@ -1,0 +1,35 @@
+services:
+  # -----------------------------------------------
+  # ------------------- BACKEND -------------------
+  # -----------------------------------------------
+  backend-tests:
+    container_name: bulhma-backend-tests
+    build:
+      dockerfile: Dockerfile.test
+      context: ./backend
+    volumes:
+      - ./backend:/backend
+      - /backend/node_modules
+    env_file:
+      - ./env.test
+    depends_on:
+      - db-tests
+      - redis-tests
+    networks:
+      - backnet-tests
+      - redisnet-tests
+
+  # -----------------------------------------------
+  # --------------------- DB ----------------------
+  # -----------------------------------------------
+  db-tests:
+    container_name: bulhma-db-tests
+    image: postgres:15.3-alpine
+    env_file:
+      - ./env.test
+    networks:
+      - backnet-tests
+
+networks:
+  backnet-tests:
+  redisnet-tests:
