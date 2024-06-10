@@ -1,0 +1,195 @@
+name: MR Checks
+on: push
+jobs:
+  changes:
+    name: Identify changes
+    runs-on: ubuntu-22.04
+    outputs:
+      frontend: ${{ steps.changes.outputs.frontend }}
+      backend: ${{ steps.changes.outputs.backend }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            frontend:
+              - 'frontend/**'
+            backend:
+              - 'backend/**'
+  frontend-eslint:
+    name: Frontend Eslint
+    needs: changes
+    if: ${{ needs.changes.outputs.frontend == 'true' }}
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        with:
+          version: 8
+          run_install: false
+      - name: Install dependencies
+        working-directory: frontend
+        run: pnpm install
+      - name: Run eslint
+        working-directory: frontend
+        run: pnpm run lint
+  frontend-prettier:
+    name: Frontend Prettier
+    needs: changes
+    if: ${{ needs.changes.outputs.frontend == 'true' }}
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        with:
+          version: 8
+          run_install: false
+      - name: Install dependencies
+        working-directory: frontend
+        run: pnpm install
+      - name: Run prettier
+        working-directory: frontend
+        run: pnpm run prettier:check
+  frontend-build:
+    name: Build Frontend
+    needs: [frontend-eslint, frontend-prettier]
+    if: ${{ needs.changes.outputs.frontend == 'true' }}
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        with:
+          version: 8
+          run_install: false
+      - name: Install dependencies
+        working-directory: frontend
+        run: pnpm install
+      - name: Run build
+        working-directory: frontend
+        run: pnpm run build
+
+  # BACKEND
+
+  backend-eslint:
+    name: Backend Eslint
+    needs: changes
+    if: ${{ needs.changes.outputs.backend == 'true' }}
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        with:
+          version: 8
+          run_install: false
+      - name: Install dependencies
+        working-directory: backend
+        run: pnpm install
+      - name: Run eslint
+        working-directory: backend
+        run: pnpm run lint
+  backend-prettier:
+    name: Backend Prettier
+    needs: changes
+    if: ${{ needs.changes.outputs.backend == 'true' }}
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        with:
+          version: 8
+          run_install: false
+      - name: Install dependencies
+        working-directory: backend
+        run: pnpm install
+      - name: Run prettier
+        working-directory: backend
+        run: pnpm run prettier:check
+  backend-build:
+    name: Build Backend
+    needs: [backend-eslint, backend-prettier]
+    if: ${{ needs.changes.outputs.backend == 'true' }}
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        with:
+          version: 8
+          run_install: false
+      - name: Install dependencies
+        working-directory: backend
+        run: pnpm install
+      - name: Run build
+        working-directory: backend
+        run: pnpm run build
+  backend-unit-test:
+    name: Backend Unit Test
+    needs: [backend-build]
+    if: ${{ needs.changes.outputs.backend == 'true' }}
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        with:
+          version: 8
+          run_install: false
+      - name: Install dependencies
+        working-directory: backend
+        run: pnpm install
+      - name: Launch tests
+        working-directory: backend
+        run: pnpm run test:unit
+  backend-functional-test:
+    name: Backend Functional Test
+    needs: [backend-build]
+    if: ${{ needs.changes.outputs.backend == 'true' }}
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Build docker-compose.test.yml
+        run: sh build_test.sh
+      - name: Launch tests
+        run: sh start_test.sh
