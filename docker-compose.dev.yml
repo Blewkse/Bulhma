@@ -34,7 +34,6 @@ services:
       - ./env
     depends_on:
       - db
-      - redis
     volumes:
       - ./backend:/backend
       # Don't include node_modules in volume.
@@ -43,9 +42,8 @@ services:
     networks:
       - backnet
       - frontnet
-      - redisnet
     ports:
-      - 3333:3333
+      - 5173:5173
     restart: always
 
   # -----------------------------------------------
@@ -84,10 +82,8 @@ services:
 
 networks:
   backnet:
-  redisnet:
   frontnet:
 
 volumes:
   pg_data:
   pg_backups:
-  redis_data:

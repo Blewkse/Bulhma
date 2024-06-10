@@ -14,10 +14,8 @@ services:
       - ./env.test
     depends_on:
       - db-tests
-      - redis-tests
     networks:
       - backnet-tests
-      - redisnet-tests
 
   # -----------------------------------------------
   # --------------------- DB ----------------------
@@ -32,4 +30,3 @@ services:
 
 networks:
   backnet-tests:
-  redisnet-tests:
