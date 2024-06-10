@@ -3,6 +3,6 @@
 
 <template>
   <main>
-    Classement des joueurs
+    Match
   </main>
 </template>

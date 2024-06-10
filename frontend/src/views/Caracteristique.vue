@@ -3,6 +3,6 @@
 
 <template>
   <main>
-    Classement des joueurs
+    Caractéristique
   </main>
 </template>
