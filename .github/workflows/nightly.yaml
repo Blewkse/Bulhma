@@ -1,0 +1,30 @@
+name: Nightly e2e
+on:
+  schedule:
+    - cron: "0 10 * * *"
+jobs:
+  e2e:
+    if: github.ref == 'refs/heads/develop'
+    name: E2E tests
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        with:
+          version: 8
+          run_install: false
+      - name: Install dependencies
+        working-directory: frontend
+        run: pnpm install
+      - name: Install playwright dependencies
+        working-directory: frontend
+        run: npx playwright test
+      - name: Run e2e tests
+        working-directory: frontend
+        run: pnpm run test:e2e
