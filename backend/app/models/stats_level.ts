@@ -7,9 +7,6 @@ export default class StatsLevel extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
 
-  @hasOne(() => Player)
-  declare player_id: HasOne<typeof Player>
-
   @column()
   declare serve: number
 

@@ -7,9 +7,6 @@ export default class Statistic extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
 
-  @hasOne(() => Player)
-  declare player_id: HasOne<typeof Player>
-
   @column()
   declare nb_forehand: number
 
@@ -35,10 +32,10 @@ export default class Statistic extends BaseModel {
   declare nb_serviceFault: number
 
   @column()
-  declare nb_pointsMarked: number
+  declare nb_setWins: number
 
   @column()
-  declare nb_pointsTaked: number
+  declare nb_setLost: number
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

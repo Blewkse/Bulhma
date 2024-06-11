@@ -8,9 +8,6 @@ export default class MatchStat extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
 
-  @hasOne(() => Match)
-  declare match_id: HasOne<typeof Match>
-
   @hasOne(() => Statistic)
   declare stats_id_1: HasOne<typeof Statistic>
 

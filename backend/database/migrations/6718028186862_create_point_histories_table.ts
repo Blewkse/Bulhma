@@ -1,17 +1,16 @@
 import { BaseSchema } from '@adonisjs/lucid/schema'
 
 export default class extends BaseSchema {
-  protected tableName = 'users'
+  protected tableName = 'point_histories'
 
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.uuid('id').notNullable().primary()
-      table.string('full_name').notNullable()
-      table.string('email', 254).notNullable().unique()
-      table.string('password').notNullable()
-
-      table.timestamp('created_at').notNullable()
-      table.timestamp('updated_at').nullable()
+      table.uuid('player_id').unsigned().references('players.id').onDelete('CASCADE')
+      table.dateTime('date').notNullable()
+      table.integer('amount').notNullable()
+      table.timestamp('created_at')
+      table.timestamp('updated_at')
     })
   }
 
