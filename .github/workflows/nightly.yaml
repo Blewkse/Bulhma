@@ -26,6 +26,9 @@ jobs:
       - name: Install playwright dependencies
         working-directory: frontend
         run: npx playwright install --with-deps
+      - name: Build frontend
+        working-directory: frontend
+        run: pnpm run build
       - name: Run e2e tests
         working-directory: frontend
         run: pnpm run test:e2e
