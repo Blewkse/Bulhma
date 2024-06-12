@@ -1,11 +1,10 @@
 name: Nightly e2e
 on:
-  push:
-  # schedule:
-  #   - cron: "0 10 * * *"
+  schedule:
+    - cron: "0 0 * * *"
 jobs:
   e2e:
-    # if: github.ref == 'refs/heads/develop'
+    if: github.ref == 'refs/heads/develop'
     name: E2E tests
     runs-on: ubuntu-22.04
     steps:
