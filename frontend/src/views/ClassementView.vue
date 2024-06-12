@@ -4,34 +4,34 @@
       <h1>Classement des joueurs</h1>
       <table class="player-table">
         <thead>
-        <tr>
-          <th>Nom</th>
-          <th>Forehand win</th>
-          <th>Backhand win</th>
-          <th>Fault</th>
-          <th>Smash</th>
-          <th>Serve fault</th>
-          <th>Marked points</th>
-          <th>Tasked points</th>
-          <th>Wins</th>
-          <th>Losses</th>
-          <th>Points</th>
-        </tr>
+          <tr>
+            <th>Nom</th>
+            <th>Forehand win</th>
+            <th>Backhand win</th>
+            <th>Fault</th>
+            <th>Smash</th>
+            <th>Serve fault</th>
+            <th>Marked points</th>
+            <th>Tasked points</th>
+            <th>Wins</th>
+            <th>Losses</th>
+            <th>Points</th>
+          </tr>
         </thead>
         <tbody>
-        <tr v-for="player in players" :key="player.name">
-          <td>{{ player.name }}</td>
-          <td>{{ player.forehandWin }}</td>
-          <td>{{ player.backhandWin }}</td>
-          <td>{{ player.fault }}</td>
-          <td>{{ player.smash }}</td>
-          <td>{{ player.serveFault }}</td>
-          <td>{{ player.markedPoints }}</td>
-          <td>{{ player.taskedPoints }}</td>
-          <td>{{ player.wins }}</td>
-          <td>{{ player.losses }}</td>
-          <td>{{ player.points }}</td>
-        </tr>
+          <tr v-for="player in players" :key="player.name">
+            <td>{{ player.name }}</td>
+            <td>{{ player.forehandWin }}</td>
+            <td>{{ player.backhandWin }}</td>
+            <td>{{ player.fault }}</td>
+            <td>{{ player.smash }}</td>
+            <td>{{ player.serveFault }}</td>
+            <td>{{ player.markedPoints }}</td>
+            <td>{{ player.taskedPoints }}</td>
+            <td>{{ player.wins }}</td>
+            <td>{{ player.losses }}</td>
+            <td>{{ player.points }}</td>
+          </tr>
         </tbody>
       </table>
     </main>
@@ -39,20 +39,20 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent } from 'vue'
 
 interface Player {
-  name: string;
-  forehandWin: number;
-  backhandWin: number;
-  fault: number;
-  smash: number;
-  serveFault: number;
-  markedPoints: number;
-  taskedPoints: number;
-  wins: number;
-  losses: number;
-  points: number;
+  name: string
+  forehandWin: number
+  backhandWin: number
+  fault: number
+  smash: number
+  serveFault: number
+  markedPoints: number
+  taskedPoints: number
+  wins: number
+  losses: number
+  points: number
 }
 
 export default defineComponent({
@@ -112,11 +112,10 @@ export default defineComponent({
           points: 8500
         }
       ] as Player[]
-    };
+    }
   }
-});
+})
 </script>
-
 
 <style scoped>
 main {

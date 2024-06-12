@@ -7,7 +7,6 @@ import Match from '@/views/MatchView.vue'
 import CaracteristiqueView from '@/views/CaracteristiqueView.vue'
 import InfoPlayer from '@/views/InfoPlayer.vue'
 
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [

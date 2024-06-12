@@ -4,22 +4,22 @@
       <h1>Infos players</h1>
       <table class="player-table">
         <thead>
-        <tr>
-          <th>Firstname</th>
-          <th>Lastname</th>
-          <th>Rank</th>
-          <th>Best rank</th>
-          <th>Worst rank</th>
-        </tr>
+          <tr>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Rank</th>
+            <th>Best rank</th>
+            <th>Worst rank</th>
+          </tr>
         </thead>
         <tbody>
-        <tr v-for="player in players" :key="player.firstname + player.lastname">
-          <td>{{ player.firstname }}</td>
-          <td>{{ player.lastname }}</td>
-          <td>{{ player.rank }}</td>
-          <td>{{ player.bestRank }}</td>
-          <td>{{ player.worstRank }}</td>
-        </tr>
+          <tr v-for="player in players" :key="player.firstname + player.lastname">
+            <td>{{ player.firstname }}</td>
+            <td>{{ player.lastname }}</td>
+            <td>{{ player.rank }}</td>
+            <td>{{ player.bestRank }}</td>
+            <td>{{ player.worstRank }}</td>
+          </tr>
         </tbody>
       </table>
     </main>
@@ -27,14 +27,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent } from 'vue'
 
 interface Player {
-  firstname: string;
-  lastname: string;
-  rank: number;
-  bestRank: number;
-  worstRank: number;
+  firstname: string
+  lastname: string
+  rank: number
+  bestRank: number
+  worstRank: number
 }
 
 export default defineComponent({
@@ -70,9 +70,9 @@ export default defineComponent({
           worstRank: 200
         }
       ] as Player[]
-    };
+    }
   }
-});
+})
 </script>
 
 <style scoped>
