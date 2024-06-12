@@ -29,13 +29,13 @@ export default class Statistic extends BaseModel {
   declare nb_ace: number
 
   @column()
-  declare nb_serviceFault: number
+  declare nb_service_fault: number
 
   @column()
-  declare nb_setWins: number
+  declare nb_set_wins: number
 
   @column()
-  declare nb_setLost: number
+  declare nb_set_lost: number
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

@@ -6,13 +6,19 @@ import Match from './match.js'
 
 export default class Score extends BaseModel {
   @column({ isPrimary: true })
-  declare id: number
+  declare id: string
 
-  @hasOne(() => Player)
-  declare player_id: HasOne<typeof Player>
+  @hasOne(() => Player, { foreignKey: 'id' })
+  declare player: HasOne<typeof Player>
 
   @column()
   declare score: number
+
+  @column()
+  declare matchId: string
+
+  @belongsTo(() => Match)
+  declare match: BelongsTo<typeof Match>
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

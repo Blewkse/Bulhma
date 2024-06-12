@@ -7,21 +7,27 @@ import MatchStat from './match_stat.js'
 
 export default class Match extends BaseModel {
   @column({ isPrimary: true })
-  declare id: number
+  declare id: string
 
-  @hasOne(() => Player)
-  declare player_id_winner: HasOne<typeof Player> | null
+  @hasOne(() => Player, { foreignKey: 'id' })
+  declare player_winner: HasOne<typeof Player>
 
-  @hasOne(() => Player)
-  declare player_id_looser: HasOne<typeof Player> | null
+  @hasOne(() => Player, { foreignKey: 'id' })
+  declare player_looser: HasOne<typeof Player>
 
-  @hasOne(() => MatchStat)
+  @hasOne(() => MatchStat, { foreignKey: 'id' })
   declare match_stats: HasOne<typeof MatchStat>
 
   @hasMany(() => Score)
   declare scores: HasMany<typeof Score>
 
-  @manyToMany(() => Player)
+  @manyToMany(() => Player, {
+    localKey: 'id',
+    pivotTable: 'match_players',
+    relatedKey: 'id',
+    pivotForeignKey: 'match_id',
+    pivotRelatedForeignKey: 'player_id',
+  })
   declare players: ManyToMany<typeof Player>
 
   @column()

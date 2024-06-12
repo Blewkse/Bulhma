@@ -5,7 +5,7 @@ export default class extends BaseSchema {
 
   async up() {
     this.schema.createTable(this.tableName, (table) => {
-      table.uuid('id').primary()
+      table.uuid('id').defaultTo(this.raw('uuid_generate_v4()')).primary()
       table.uuid('stats_1_id').unsigned().references('statistics.id').onDelete('CASCADE')
       table.uuid('stats_2_id').unsigned().references('statistics.id').onDelete('CASCADE')
 

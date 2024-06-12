@@ -5,7 +5,7 @@ import type { HasOne } from '@adonisjs/lucid/types/relations'
 
 export default class StatsLevel extends BaseModel {
   @column({ isPrimary: true })
-  declare id: number
+  declare id: string
 
   @column()
   declare serve: number

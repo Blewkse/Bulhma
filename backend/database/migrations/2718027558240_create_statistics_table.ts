@@ -5,17 +5,17 @@ export default class extends BaseSchema {
 
   async up() {
     this.schema.createTable(this.tableName, (table) => {
-      table.uuid('id').notNullable().primary()
-      table.integer('nb_forehand')
-      table.integer('nb_backhand')
-      table.integer('nb_fault')
-      table.integer('nb_smash')
-      table.integer('nb_wins')
-      table.integer('nb_looses')
-      table.integer('nb_ace')
-      table.integer('nb_serviceFault')
-      table.integer('nb_setWins')
-      table.integer('nb_setLost')
+      table.uuid('id').defaultTo(this.raw('uuid_generate_v4()')).notNullable().primary()
+      table.integer('nb_forehand').defaultTo(0)
+      table.integer('nb_backhand').defaultTo(0)
+      table.integer('nb_fault').defaultTo(0)
+      table.integer('nb_smash').defaultTo(0)
+      table.integer('nb_wins').defaultTo(0)
+      table.integer('nb_looses').defaultTo(0)
+      table.integer('nb_ace').defaultTo(0)
+      table.integer('nb_service_fault').defaultTo(0)
+      table.integer('nb_set_wins').defaultTo(0)
+      table.integer('nb_set_lost').defaultTo(0)
 
       table.timestamp('created_at')
       table.timestamp('updated_at')

@@ -5,7 +5,7 @@ export default class extends BaseSchema {
 
   async up() {
     this.schema.createTable(this.tableName, (table) => {
-      table.uuid('id').notNullable().primary()
+      table.uuid('id').defaultTo(this.raw('uuid_generate_v4()')).notNullable().primary()
       table.uuid('player_winner_id').unsigned().references('players.id').onDelete('CASCADE')
       table.uuid('player_looser_id').unsigned().references('players.id').onDelete('CASCADE')
       table.string('terrain_type').notNullable()

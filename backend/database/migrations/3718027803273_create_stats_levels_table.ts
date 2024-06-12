@@ -5,7 +5,7 @@ export default class extends BaseSchema {
 
   async up() {
     this.schema.createTable(this.tableName, (table) => {
-      table.uuid('id').notNullable().primary()
+      table.uuid('id').defaultTo(this.raw('uuid_generate_v4()')).notNullable().primary()
       table.integer('serve').defaultTo('50')
       table.integer('backhand').defaultTo('50')
       table.integer('forehand').defaultTo('50')
