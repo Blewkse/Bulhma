@@ -1,7 +1,7 @@
 name: Nightly e2e
 on:
   schedule:
-    - cron: "0 10 * * *"
+    - cron: "0 0 * * *"
 jobs:
   e2e:
     if: github.ref == 'refs/heads/develop'
@@ -24,7 +24,10 @@ jobs:
         run: pnpm install
       - name: Install playwright dependencies
         working-directory: frontend
-        run: npx playwright test
+        run: npx playwright install --with-deps
+      - name: Build frontend
+        working-directory: frontend
+        run: pnpm run build
       - name: Run e2e tests
         working-directory: frontend
         run: pnpm run test:e2e
