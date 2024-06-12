@@ -1,16 +1,18 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import ClassementView from '@/views/ClassementView.vue'
-import ConnexionView from '@/views/Connexion.vue'
-import InscriptionView from '@/views/Inscription.vue'
-import Match from "@/views/Match.vue";
-import Caracteristique from "@/views/Caracteristique.vue";
+import ConnexionView from '@/views/ConnexionView.vue'
+import InscriptionView from '@/views/InscriptionView.vue'
+import Match from '@/views/MatchView.vue'
+import CaracteristiqueView from '@/views/CaracteristiqueView.vue'
+import InfoPlayer from '@/views/InfoPlayer.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/home',
+      path: '/',
       name: 'home',
       component: HomeView
     },
@@ -30,9 +32,14 @@ const router = createRouter({
       component: Match
     },
     {
+      path: '/info',
+      name: 'infoPlayeur',
+      component: InfoPlayer
+    },
+    {
       path: '/caracteristique',
       name: 'caracteristique',
-      component: Caracteristique
+      component: CaracteristiqueView
     },
     {
       path: '/inscription',
