@@ -1,7 +1,5 @@
+import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
-import { BaseModel, column, hasOne } from '@adonisjs/lucid/orm'
-import Player from './player.js'
-import type { HasOne } from '@adonisjs/lucid/types/relations'
 
 export default class StatsLevel extends BaseModel {
   @column({ isPrimary: true })

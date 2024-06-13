@@ -65,33 +65,33 @@ export default class PlayerSeeder extends BaseSeeder {
 
     await player1.related('history').createMany([
       {
-        date: DateTime.fromJSDate(new Date()),
+        date: new Date(),
         amount: 372,
       },
       {
-        date: DateTime.fromJSDate(new Date()),
+        date: new Date(),
         amount: 402,
       },
     ])
 
     await player2.related('history').createMany([
       {
-        date: DateTime.fromJSDate(new Date()),
+        date: new Date(),
         amount: 4343,
       },
       {
-        date: DateTime.fromJSDate(new Date()),
+        date: new Date(),
         amount: 4500,
       },
     ])
 
     await player3.related('history').createMany([
       {
-        date: DateTime.fromJSDate(new Date()),
+        date: new Date(),
         amount: 2652,
       },
       {
-        date: DateTime.fromJSDate(new Date()),
+        date: new Date(),
         amount: 2700,
       },
     ])

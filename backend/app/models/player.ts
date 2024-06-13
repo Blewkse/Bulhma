@@ -1,11 +1,10 @@
+import { BaseModel, belongsTo, column, hasMany, hasOne } from '@adonisjs/lucid/orm'
+import type { BelongsTo, HasMany, HasOne } from '@adonisjs/lucid/types/relations'
 import { DateTime } from 'luxon'
-import { BaseModel, belongsTo, column, hasMany, hasOne, manyToMany } from '@adonisjs/lucid/orm'
-import User from './user.js'
-import type { BelongsTo, HasMany, HasOne, ManyToMany } from '@adonisjs/lucid/types/relations'
-import StatsLevel from './stats_level.js'
 import PointHistory from './point_history.js'
 import Statistic from './statistic.js'
-import Match from './match.js'
+import StatsLevel from './stats_level.js'
+import User from './user.js'
 
 export default class Player extends BaseModel {
   @column({ isPrimary: true })

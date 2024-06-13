@@ -7,8 +7,8 @@ export default class PointHistory extends BaseModel {
   @column({ isPrimary: true })
   declare id: string
 
-  @column.date({ serialize: (value) => value.toFormat('LLL yyyy') })
-  declare date: DateTime
+  @column()
+  declare date: Date
 
   @column()
   declare playerId: string
