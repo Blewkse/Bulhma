@@ -19,7 +19,7 @@
               <td>{{ serviceStat }}</td>
               <td>
                 <button @click="increaseStat('service')">+</button>
-                <button @click="deIncreaseStat('service')">-</button>
+                <button @click="decreaseStat('service')">-</button>
               </td>
             </tr>
             <tr>
@@ -27,7 +27,7 @@
               <td>{{ backhandStat }}</td>
               <td>
                 <button @click="increaseStat('backhand')">+</button>
-                <button @click="deIncreaseStat('backhand')">-</button>
+                <button @click="decreaseStat('backhand')">-</button>
               </td>
             </tr>
             <tr>
@@ -35,7 +35,7 @@
               <td>{{ forehandStat }}</td>
               <td>
                 <button @click="increaseStat('forehand')">+</button>
-                <button @click="deIncreaseStat('forehand')">-</button>
+                <button @click="decreaseStat('forehand')">-</button>
               </td>
             </tr>
             <tr>
@@ -43,7 +43,7 @@
               <td>{{ smashStat }}</td>
               <td>
                 <button @click="increaseStat('smash')">+</button>
-                <button @click="deIncreaseStat('smash')">-</button>
+                <button @click="decreaseStat('smash')">-</button>
               </td>
             </tr>
             <tr>
@@ -51,7 +51,7 @@
               <td>{{ accurateStat }}</td>
               <td>
                 <button @click="increaseStat('accurate')">+</button>
-                <button @click="deIncreaseStat('accurate')">-</button>
+                <button @click="decreaseStat('accurate')">-</button>
               </td>
             </tr>
             <tr>
@@ -65,8 +65,10 @@
   </main>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
   data() {
     return {
       serviceStat: 50,
@@ -78,53 +80,66 @@ export default {
     }
   },
   methods: {
-    increaseStat(skill) {
+    increaseStat(skill: string) {
       if (this.availablePoints > 0) {
         switch (skill) {
           case 'service':
-            this.serviceStat += 1
+            this.serviceStat++
             break
           case 'backhand':
-            this.backhandStat += 1
+            this.backhandStat++
             break
           case 'forehand':
-            this.forehandStat += 1
+            this.forehandStat++
             break
           case 'smash':
-            this.smashStat += 1
+            this.smashStat++
             break
           case 'accurate':
-            this.accurateStat += 1
+            this.accurateStat++
             break
         }
         this.availablePoints--
       }
     },
-    deIncreaseStat(skill) {
-      if (this.availablePoints > 0) {
-        switch (skill) {
-          case 'service':
-            this.serviceStat -= 1
-            break
-          case 'backhand':
-            this.backhandStat -= 1
-            break
-          case 'forehand':
-            this.forehandStat -= 1
-            break
-          case 'smash':
-            this.smashStat -= 1
-            break
-          case 'accurate':
-            this.accurateStat -= 1
-            break
-        }
-        this.availablePoints++
+    decreaseStat(skill: string) {
+      switch (skill) {
+        case 'service':
+          if (this.serviceStat > 0) {
+            this.serviceStat--
+            this.availablePoints++
+          }
+          break
+        case 'backhand':
+          if (this.backhandStat > 0) {
+            this.backhandStat--
+            this.availablePoints++
+          }
+          break
+        case 'forehand':
+          if (this.forehandStat > 0) {
+            this.forehandStat--
+            this.availablePoints++
+          }
+          break
+        case 'smash':
+          if (this.smashStat > 0) {
+            this.smashStat--
+            this.availablePoints++
+          }
+          break
+        case 'accurate':
+          if (this.accurateStat > 0) {
+            this.accurateStat--
+            this.availablePoints++
+          }
+          break
       }
     }
   }
-}
+})
 </script>
+
 <style scoped>
 .container-global {
   width: 100%;
