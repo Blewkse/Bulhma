@@ -9,8 +9,9 @@
     "build": "node ace build",
     "dev": "node ace serve --hmr",
     "test": "node ace test",
-    "test:functional": "node ace test functional",
-    "test:unit": "node ace test unit",
+    "test:functional": "nyc --reporter=lcov node ace test functional",
+    "test:unit": "nyc --reporter=lcov node ace test unit",
+    "test:perf": "artillery run ./artillery/hello-world-load-test.yaml --output ./perf-report.json && artillery report ./perf-report.json",
     "lint": "eslint .",
     "format": "prettier --write .",
     "typecheck": "tsc --noEmit",
@@ -46,9 +47,11 @@
     "@swc/core": "^1.5.7",
     "@types/luxon": "^3.4.2",
     "@types/node": "^20.12.12",
+    "artillery": "^2.0.15",
+    "c8": "^10.1.2",
     "eslint": "^8.57.0",
     "hot-hook": "^0.2.6",
-    "pino-pretty": "^11.1.0",
+    "nyc": "^17.0.0",
     "prettier": "^3.2.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
@@ -62,6 +65,7 @@
     "@vinejs/vine": "^2.0.0",
     "luxon": "^3.4.4",
     "pg": "^8.12.0",
+    "pino-pretty": "^11.1.0",
     "reflect-metadata": "^0.2.2"
   },
   "hotHook": {
