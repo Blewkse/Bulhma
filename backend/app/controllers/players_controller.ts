@@ -5,7 +5,7 @@ import {
   playerValidator,
   pointHistoryValidator,
   playerStatsLevelsValidator,
-  playerStatisticsValidator,
+  statisticsValidator,
 } from '#validators/player'
 import StatsLevel from '#models/stats_level'
 import Statistic from '#models/statistic'
@@ -100,7 +100,7 @@ export default class PlayersController {
 
   async addAPlayerStatistics(ctx: HttpContext) {
     const player = await Player.findOrFail(ctx.request.params().id)
-    const schema = await ctx.request.validateUsing(playerStatisticsValidator)
+    const schema = await ctx.request.validateUsing(statisticsValidator)
     player.related('statistics').create({
       nb_forehand: schema.nb_forehand,
       nb_backhand: schema.nb_backhand,

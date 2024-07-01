@@ -31,7 +31,7 @@ export const playerStatsLevelsValidator = vine.compile(
   })
 )
 
-export const playerStatisticsValidator = vine.compile(
+export const statisticsValidator = vine.compile(
   vine.object({
     nb_forehand: vine.number(),
     nb_backhand: vine.number(),
