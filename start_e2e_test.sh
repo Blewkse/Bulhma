@@ -1,0 +1,1 @@
+docker compose -f docker-compose.test.e2e.yml run frontend

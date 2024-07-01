@@ -1,0 +1,67 @@
+services:
+  # -----------------------------------------------
+  # ------------------- BACKEND -------------------
+  # -----------------------------------------------
+  frontend:
+    container_name: bulhma-frontend-e2e-tests
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.e2e.test
+    command: pnpm run test:e2e
+    env_file:
+      - ./env.e2e.test
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/frontend
+      # Don't include node_modules in volume.
+      # When adding a dependency, the image has to be built again or we have to go into the container and install the dependency manually
+      - /frontend/node_modules/
+    networks:
+      - frontnet-e2e-tests
+    ports:
+      - 4000:4000
+    restart: always
+  backend:
+    container_name: bulhma-backend-e2e-tests
+    build:
+      context: ./backend
+    env_file:
+      - ./env.e2e.test
+    depends_on:
+      - db-e2e-tests
+    networks:
+      - backnet-e2e-tests
+
+  # -----------------------------------------------
+  # ------------------- NGINX ---------------------
+  # -----------------------------------------------
+  nginx:
+    container_name: bulhma-nginx-e2e-tests
+    image: nginx:1.25.1-alpine
+    depends_on:
+      - backend
+      - frontend
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - frontnet-e2e-tests
+      - backnet-e2e-tests
+    restart: always
+
+  # -----------------------------------------------
+  # --------------------- DB ----------------------
+  # -----------------------------------------------
+  db-e2e-tests:
+    container_name: bulhma-db-e2e-tests
+    image: postgres:15.3-alpine
+    env_file:
+      - ./env.e2e.test
+    networks:
+      - backnet-e2e-tests
+
+networks:
+  backnet-e2e-tests:
+  frontnet-e2e-tests:
