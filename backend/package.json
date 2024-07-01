@@ -51,6 +51,7 @@
     "c8": "^10.1.2",
     "eslint": "^8.57.0",
     "hot-hook": "^0.2.6",
+    "nyc": "^17.0.0",
     "prettier": "^3.2.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
@@ -64,8 +65,8 @@
     "@vinejs/vine": "^2.0.0",
     "luxon": "^3.4.4",
     "pg": "^8.12.0",
-    "reflect-metadata": "^0.2.2",
-    "pino-pretty": "^11.1.0"
+    "pino-pretty": "^11.1.0",
+    "reflect-metadata": "^0.2.2"
   },
   "hotHook": {
     "boundaries": [
