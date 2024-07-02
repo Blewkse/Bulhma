@@ -1,5 +1,5 @@
 # Stage 1
-FROM node:21.6.2-slim
+FROM node:21.6.2-slim AS builder
 WORKDIR /frontend
 
 COPY ./package.json .
