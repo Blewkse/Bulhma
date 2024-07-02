@@ -15,7 +15,7 @@ RUN pnpm run build
 # Stage 2
 FROM nginx:1.25.1-alpine
 WORKDIR /data/www
-COPY --from=builder /app/dist .
+COPY --from=builder /frontend/dist .
 
 # Change default configuration
 RUN rm /etc/nginx/conf.d/default.conf
